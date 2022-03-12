@@ -1,5 +1,32 @@
 <ion-content>
-  <app-feed></app-feed>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <p style="margin-bottom: 5px">Instagram</p>
+        <ion-grid style="padding-left: 0;">
+          <ion-row>
+            <ion-col style="padding-left: 0;" size="1">  
+              <ion-icon name="home-sharp" routerLink="/feed">Feed></ion-icon>
+            </ion-col>
+            <ion-col style="padding-left: 0;" size="1">
+              <ion-icon name="person-sharp" routerLink="/perfil">Perfil></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <router-outlet></router-outlet>
+
+
+  <!--
+  <ion-button (click)="togglePerfil()">
+    <span *ngIf="perfil">Vista Feed</span>
+    <span *ngIf="!perfil">Vista Perfil</span>
+  </ion-button>-->
+  <!--<app-feed *ngIf="!perfil"></app-feed>
+  <app-perfil *ngIf="perfil"></app-perfil>-->
 </ion-content>
 
 <!--
@@ -16,4 +43,3 @@
   <img src="{{perrillo.src}}" alt="" width="250px">
 </div>
 -->
-

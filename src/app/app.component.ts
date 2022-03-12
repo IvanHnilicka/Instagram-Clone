@@ -18,4 +18,12 @@ export class AppComponent {
     "assets/perro.jpg",
     "assets/perro.jpg"
   ];
+
+  perfil = false;
+
+  togglePerfil(): void{
+    this.perfil = !this.perfil;
+  }
+
 }
+

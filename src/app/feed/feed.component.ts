@@ -14,14 +14,14 @@ export class FeedComponent implements OnInit {
 
   perrillos = [
     {
-      "usuario": "@unosperrillos",
-      "src": "assets/perro.jpg",
-      "caption": "unos perrillos..."
+      "usuario": "@kittyCat",
+      "src": "assets/imagen1.jpg",
+      "caption": "Loving my new hat!"
     },
     {
-      "usuario": "@amsiedad",
-      "src": "assets/amsiedad.jpg",
-      "caption": "me da amsiedad"
+      "usuario": "@graykitty104",
+      "src": "assets/imagen2.jpg",
+      "caption": "tb"
     }
   ];
 
