@@ -7,6 +7,8 @@ import { FeedComponent } from './feed/feed.component';
 import { IonicModule } from '@ionic/angular';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostComponent } from './post/post.component';
+import { TabsComponent } from './tabs/tabs.component';
 import { FormsModule } from '@angular/forms';
 import { RoutesModule } from './routes.module';
 
@@ -15,7 +17,9 @@ import { RoutesModule } from './routes.module';
     AppComponent,
     FeedComponent,
     PerfilComponent,
-    PostsComponent
+    PostsComponent,
+    PostComponent,
+    TabsComponent
   ],
   imports: [
     FormsModule,
