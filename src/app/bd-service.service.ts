@@ -21,8 +21,4 @@ export class BdServiceService {
     return this.http.get('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones.json')
   }
 
-  getDetallePost(id: string): any{
-    return this.http.get('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones/' + id + '.json')
-  }
-
 }
