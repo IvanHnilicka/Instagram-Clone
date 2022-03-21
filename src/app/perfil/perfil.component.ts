@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BdServiceService } from '../bd-service.service';
 
 @Component({
   selector: 'app-perfil',
@@ -7,20 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  constructor() { }
+  constructor(private db: BdServiceService) { }
 
   ngOnInit(): void {
+    this.db.getDatosUsuario().subscribe((res: any) =>{
+      this.usuario = res;
+    })
   }
 
-  usuario = {
-    "nombre": "Cat",
-    "usuario": "@CatInAHat",
-    "descripcion": "Meow!",
-    "followers": 257165, 
-    "following": 120,
-    "posts": 3,
-    "fotoPerfil": "assets/imagenesPerfil/imagen4.jpg"
-  };
+  usuario: any = {};
 
   editando = false;
 

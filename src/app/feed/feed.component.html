@@ -1,13 +1,13 @@
 <ion-grid>
-    <ion-row *ngFor="let perrillo of perrillos">
+    <ion-row *ngFor="let publicacion of Publicaciones">
         <ion-col>
             <ion-card>
                 <ion-card-header>
-                    {{perrillo.usuario}}
+                    {{publicacion.usuario}}
                 </ion-card-header>
                 <ion-card-content>
-                    <img src="{{perrillo.src}}" alt="" width = 100%>
-                    <p>{{perrillo.caption}}</p>
+                    <img src="{{publicacion.src}}" alt="" width = 100%>
+                    <p>{{publicacion.caption}}</p>
                 </ion-card-content>
             </ion-card>
         </ion-col>

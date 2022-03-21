@@ -11,6 +11,7 @@ import { PostComponent } from './post/post.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { FormsModule } from '@angular/forms';
 import { RoutesModule } from './routes.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RoutesModule } from './routes.module';
     BrowserModule,
     AppRoutingModule,
     IonicModule.forRoot(),
-    RoutesModule
+    RoutesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
