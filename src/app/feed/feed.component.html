@@ -6,7 +6,7 @@
                     {{publicacion.usuario}}
                 </ion-card-header>
                 <ion-card-content>
-                    <img src="{{publicacion.src}}" alt="" width = 100%>
+                    <img [src]="publicacion.src" alt="" width = 100% [routerLink]="['/postFeed', publicacion.id]">
                     <p>{{publicacion.caption}}</p>
                 </ion-card-content>
             </ion-card>

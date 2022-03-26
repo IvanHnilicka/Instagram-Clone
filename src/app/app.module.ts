@@ -12,15 +12,21 @@ import { TabsComponent } from './tabs/tabs.component';
 import { FormsModule } from '@angular/forms';
 import { RoutesModule } from './routes.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PopoverComponent } from './popover/popover.component';
+import { PublicacionComponent } from './publicacion/publicacion.component';
+import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FeedComponent,
+    DetallePostFeedComponent,
     PerfilComponent,
     PostsComponent,
     PostComponent,
-    TabsComponent
+    TabsComponent,
+    PopoverComponent,
+    PublicacionComponent
   ],
   imports: [
     FormsModule,

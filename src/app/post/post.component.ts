@@ -30,7 +30,6 @@ export class PostComponent implements OnInit {
   ];
 
   obtenerPost(id: String){
-
     for(let i = 0; i < this.posts.length; i++){
       if(this.posts[i].id == id){
         this.postDetalle = this.posts[i];
@@ -41,5 +40,3 @@ export class PostComponent implements OnInit {
   }
 
 }
-
-

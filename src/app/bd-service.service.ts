@@ -21,4 +21,19 @@ export class BdServiceService {
     return this.http.get('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones.json')
   }
 
+
+
+  //Funciones POST
+  postPublicacion(post: any){
+    return this.http.post('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones.json', post);
+  }
+
+
+
+  //Funciones DELETE
+  deletePublicacion(){
+    
+  }
+
+
 }
