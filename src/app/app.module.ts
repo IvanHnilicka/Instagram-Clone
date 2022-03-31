@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PopoverComponent } from './popover/popover.component';
 import { PublicacionComponent } from './publicacion/publicacion.component';
 import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.component';
+import { HistoriasComponent } from './historias/historias.component';
+import { HistoriaContenidoComponent } from './historia-contenido/historia-contenido.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.
     PostComponent,
     TabsComponent,
     PopoverComponent,
-    PublicacionComponent
+    PublicacionComponent,
+    HistoriasComponent,
+    HistoriaContenidoComponent
   ],
   imports: [
     FormsModule,

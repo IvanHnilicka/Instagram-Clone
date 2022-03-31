@@ -13,3 +13,20 @@
     border: solid 1px gray;
     margin-bottom: 10px;
 }
+
+.usuario-card-header{
+    display: flex;
+}
+
+.label{
+    align-self: center;
+    margin-left: 10px;
+}
+
+.opciones{
+    display: flex;
+}
+
+#caption-publicacion{
+    padding-left: 5px;
+}

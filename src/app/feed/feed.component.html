@@ -1,14 +1,62 @@
 <ion-grid>
+    <ion-row>
+        <ion-col size-md="8" offset-md="2">
+            <app-historias></app-historias>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<ion-grid>
     <ion-row *ngFor="let publicacion of Publicaciones">
-        <ion-col>
+        <ion-col size-md="8" offset-md="2">
             <ion-card>
                 <ion-card-header>
-                    {{publicacion.usuario}}
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="10">
+                                <div class="usuario-card-header">
+                                    <ion-avatar>
+                                        <ion-img src="https://www.gub.uy/fiscalia-general-nacion/sites/fiscalia-general-nacion/files/catalogo/Sin-Perfil-Hombre.png" alt="" width="50px"></ion-img>
+                                    </ion-avatar>
+                                    <ion-label class="label">{{publicacion.usuario}}</ion-label>
+                                </div>
+                            </ion-col>
+                            <ion-col size="2">
+                                <ion-button fill="translucent" id="trigger-popup--{{publicacion.id}}" class="trigger">
+                                    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                                </ion-button>
+                                <ion-popover trigger="trigger-popup--{{publicacion.id}}">
+                                    <ng-template>
+                                        <app-popover></app-popover>
+                                    </ng-template>
+                                </ion-popover>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
                 </ion-card-header>
+
                 <ion-card-content>
                     <img [src]="publicacion.src" alt="" width = 100% [routerLink]="['/postFeed', publicacion.id]">
-                    <p>{{publicacion.caption}}</p>
+                    
+                    <div class="opciones">
+                        <ion-col size="1">
+                            <ion-icon name="heart-outline"></ion-icon>
+                        </ion-col>
+                        <ion-col size="1">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </ion-col>
+                        <ion-col size="1">
+                            <ion-icon name="paper-plane-outline"></ion-icon>
+                        </ion-col>
+                        <ion-col size="1" offset="8">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                        </ion-col>
+                    </div>
+
+                    <p id="caption-publicacion">{{publicacion.caption}}</p>
+
                 </ion-card-content>
+
             </ion-card>
         </ion-col>
     </ion-row>
