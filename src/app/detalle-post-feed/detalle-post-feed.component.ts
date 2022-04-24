@@ -20,7 +20,7 @@ export class DetallePostFeedComponent implements OnInit {
   publicaciones: any = [
     {
       caption: "Loving my new hat!",
-      id: "28gn1013",
+      id: "83nng72h",
       src: "assets/imagen1.jpg",
       usuario: "@kittyCat"
     },

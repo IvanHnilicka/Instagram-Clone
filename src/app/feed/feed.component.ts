@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BdServiceService } from '../bd-service.service';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-feed',
@@ -20,4 +19,21 @@ export class FeedComponent implements OnInit {
 
   Publicaciones: any = [];
 
+  borrarPost(idPost: number){
+    this.db.deletePublicacion(idPost).subscribe(res =>{
+      alert("Post borrado con exito");
+      this.ngOnInit();
+    })
+  }
+
+
+  editando: boolean = false;
+
+  guardarCambios(id: number, datos: any){
+    this.db.updatePublicacion(id, datos).subscribe(res =>{
+      alert("Cambios guardados");
+      this.editando = false;
+      this.ngOnInit();
+    })
+  }
 }
