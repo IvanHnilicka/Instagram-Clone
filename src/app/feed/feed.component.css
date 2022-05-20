@@ -16,11 +16,13 @@
 
 .usuario-card-header{
     display: flex;
+    padding-left: 4px;
 }
 
 .label{
     align-self: center;
     margin-left: 10px;
+    margin-top: 5px;
 }
 
 .opciones{
@@ -29,4 +31,15 @@
 
 #caption-publicacion{
     padding-left: 5px;
+}
+.opcion{
+    padding-top: 20px;
+}
+
+.like{
+    color: #737373;
+}
+
+.liked{
+    color: red;
 }

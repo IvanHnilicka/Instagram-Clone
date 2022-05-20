@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BdServiceService } from '../bd-service.service';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
   selector: 'app-publicacion',
@@ -9,17 +10,28 @@ import { BdServiceService } from '../bd-service.service';
 })
 export class PublicacionComponent implements OnInit {
 
-  constructor(private bd: BdServiceService) { }
+  constructor(private bd: BdServiceService, private camara: Camera) { }
 
   ngOnInit(): void {
   }
 
 
+  crearID() {
+    var id = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 8; i++)
+      id += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return id;
+  }
+
+
   nuevoPost: any = {
     "caption": "",
-    "id": "",
+    "id": this.crearID(),
     "src": "assets/imagen3.jpg",
-    "usuario": "kittyCat"
+    "usuario": "@cat"
   }
 
   
@@ -30,4 +42,29 @@ export class PublicacionComponent implements OnInit {
     })
   }
 
+
+  imgURL: any;
+
+  abrirCamara(){
+    this.camara.getPicture({
+      sourceType: this.camara.PictureSourceType.CAMERA,
+      destinationType: this.camara.DestinationType.FILE_URI
+    }).then(res =>{
+      this.imgURL = res;
+    }).catch(e =>{
+      console.log(e);
+    })
+  }
+
+
+  abrirGaleria(){
+    this.camara.getPicture({
+      sourceType: this.camara.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camara.DestinationType.FILE_URI
+    }).then(res =>{
+      this.imgURL = res;
+    }).catch(e =>{
+      console.log(e);
+    })
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BdServiceService } from '../bd-service.service';
 
 @Component({
   selector: 'app-detalle-post-feed',
@@ -8,29 +9,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetallePostFeedComponent implements OnInit {
 
-  constructor(private ruta: ActivatedRoute) { }
+  constructor(private ruta: ActivatedRoute, private db: BdServiceService) { }
 
   post = this.ruta.snapshot.params['id'];
   detallePost: any = {};
 
   ngOnInit(): void {
-    this.obtenerPost(this.post);
+    this.db.getPublicaciones().subscribe((res: any) => {
+      this.publicaciones = Object.values(res);
+      this.obtenerPost(this.post);
+    })
   }
 
-  publicaciones: any = [
-    {
-      caption: "Loving my new hat!",
-      id: "83nng72h",
-      src: "assets/imagen1.jpg",
-      usuario: "@kittyCat"
-    },
-    {
-      caption: "Me as a baby",
-      id: "92ng29t1tg",
-      src: "assets/imagen2.jpg",
-      usuario: "@graykitty104"
-    }
-  ];
+
+  publicaciones: any = [];
+  
 
   obtenerPost(id: string){
     for(let i = 0; i < this.publicaciones.length; i++){
@@ -38,7 +31,6 @@ export class DetallePostFeedComponent implements OnInit {
         this.detallePost = this.publicaciones[i];
       }
     }
-
     return this.detallePost;
   }
 

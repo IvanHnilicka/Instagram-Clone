@@ -1,10 +1,17 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        <div class="container">
-          <ion-label>Instagram</ion-label>
-
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+          <ion-toolbar>
+            <ion-title>
+              <div class="container">
+                <ion-label>Instagram</ion-label>
+              </div>
+            </ion-title>
+          </ion-toolbar>
+        </ion-col>
+        <ion-col size="2">
           <div class="notificaciones">
             <ion-button fill="translucent" id="trigger-notificaciones">
               <ion-icon name="heart-outline"></ion-icon>
@@ -19,7 +26,8 @@
               </ng-template>
             </ion-popover>
           </div>
-
+        </ion-col>
+        <ion-col size="2">
           <div class="perfil">
             <ion-avatar>
               <ion-img src="./assets/imagenesPerfil/imagen4.jpg" id="img-usuario-avatar"></ion-img>
@@ -27,18 +35,14 @@
             
             <ion-popover trigger="img-usuario-avatar">
               <ng-template>
-                <ion-list>
-                  <ion-item>
-                    Cerrar sesion
-                  </ion-item>
-                </ion-list>
+                <ion-button color="danger" fill="outline">Cerrar sesión</ion-button>
               </ng-template>
             </ion-popover>
           </div>
-
-        </div>
-      </ion-title>
-    </ion-toolbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </ion-header>
 
   <ion-content>

@@ -32,15 +32,15 @@ export class BdServiceService {
 
 
   //Funciones DELETE
-  deletePublicacion(id: number){
-    return this.http.delete('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id.toString() + '.json');
+  deletePublicacion(id: any){
+    return this.http.delete('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id + '.json');
   }
 
 
 
   //Funciones PUT
-  updatePublicacion(id: number, nuevosDatos: any){
-    return this.http.put('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id.toString() + '.json', nuevosDatos);
+  updatePublicacion(id: any, nuevosDatos: any){
+    return this.http.put('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id + '.json', nuevosDatos);
   }
 
 }

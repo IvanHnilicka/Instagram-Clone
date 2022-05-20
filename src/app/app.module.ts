@@ -17,6 +17,8 @@ import { PublicacionComponent } from './publicacion/publicacion.component';
 import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.component';
 import { HistoriasComponent } from './historias/historias.component';
 import { HistoriaContenidoComponent } from './historia-contenido/historia-contenido.component';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { HistoriaContenidoComponent } from './historia-contenido/historia-conten
     RoutesModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [Camera],
   bootstrap: [AppComponent],
   exports: [RoutesModule]
 })
