@@ -1,7 +1,17 @@
 <form #F="ngForm" (ngSubmit)="onSubmit(F)" ngNativeValidate>
-    <ion-input placeholder="Descripcion" [(ngModel)]="nuevoPost.caption" name="caption" required>Caption: </ion-input>
-    <ion-button color="tertiary" size="small" fill="outline" (click)="abrirCamara()">Tomar foto</ion-button>
-    <ion-button color="tertiary" size="small" fill="outline" (click)="abrirGaleria()">Escoger foto</ion-button><br>
-    <img src="{{imgURL}}" alt="">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="10">
+                <ion-input placeholder="Descripcion" [(ngModel)]="nuevoPost.caption" name="caption" required>Caption: </ion-input>
+            </ion-col>
+            <ion-col size="2">
+                <ion-button style="color: gray" fill="clear" (click)="abrirCamara()"> <ion-icon name="camera-outline"></ion-icon> </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
     <ion-button type="submit">Publicar</ion-button>
 </form>
+
+<br>
+<img [src]="imgURL" alt="">

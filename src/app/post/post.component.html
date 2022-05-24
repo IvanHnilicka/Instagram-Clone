@@ -2,28 +2,32 @@
     <ion-card-header>
         <ion-grid>
             <ion-row>
-                <ion-col offset="11">
+                <ion-col size="11">
+                    <ion-label><strong>@Cat</strong></ion-label>
+                </ion-col>
+                <ion-col>
                     <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </ion-card-header>
     <ion-card-content>
-        <img [src]="postDetalle.imagen" alt="" width="200px">
+        <img [src]="postDetalle.imagen" alt="" width="100%">
     </ion-card-content>
+    <ion-label style="padding-left: 15px">{{postDetalle.caption}}</ion-label>
     <div>
-        <ion-grid>
+        <ion-grid style="padding-left: 10px;">
             <ion-row>
-                <ion-col>
+                <ion-col size="1">
                     <ion-icon name="heart-outline"></ion-icon>
                 </ion-col>
-                <ion-col>
+                <ion-col size="1">
                     <ion-icon name="chatbubble-outline"></ion-icon>
                 </ion-col>
-                <ion-col>
+                <ion-col size="1">
                     <ion-icon name="paper-plane-outline"></ion-icon>
                 </ion-col>
-                <ion-col offset="8">
+                <ion-col size="1" offset="8">
                     <ion-icon name="bookmark-outline"></ion-icon>
                 </ion-col>
             </ion-row>

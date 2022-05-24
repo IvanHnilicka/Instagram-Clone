@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BdServiceService } from '../bd-service.service';
 import { PopoverController } from '@ionic/angular';
-import { PublicacionComponent } from '../publicacion/publicacion.component';
+
 
 @Component({
   selector: 'app-feed',
@@ -22,8 +22,10 @@ export class FeedComponent implements OnInit {
     })
   }
 
+
   Publicaciones: any = [];
   key: string[] = [];
+
 
   borrarPost(idPost: number){
     this.db.getPublicaciones().subscribe((res: any) =>{

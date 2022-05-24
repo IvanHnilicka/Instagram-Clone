@@ -18,6 +18,9 @@ import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.
 import { HistoriasComponent } from './historias/historias.component';
 import { HistoriaContenidoComponent } from './historia-contenido/historia-contenido.component';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
     AppRoutingModule,
     IonicModule.forRoot(),
     RoutesModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [Camera],
   bootstrap: [AppComponent],

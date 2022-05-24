@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BdServiceService } from '../bd-service.service';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { Storage, ref } from '@angular/fire/storage';
+import { uploadString } from 'firebase/storage';
 
 @Component({
   selector: 'app-publicacion',
@@ -10,10 +12,10 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 })
 export class PublicacionComponent implements OnInit {
 
-  constructor(private bd: BdServiceService, private camara: Camera) { }
+  constructor(private bd: BdServiceService,
+     private storage: Storage) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 
   crearID() {
@@ -26,45 +28,47 @@ export class PublicacionComponent implements OnInit {
     return id;
   }
 
+  id = this.crearID();
+  imgURL: any;
 
   nuevoPost: any = {
     "caption": "",
-    "id": this.crearID(),
-    "src": "assets/imagen3.jpg",
+    "id": this.id,
+    "src": this.id,
     "usuario": "@cat"
   }
 
   
   onSubmit(f: NgForm){
+    if(this.imgURL != ""){
+      const file = this.imgURL;
+      console.log(file);
+      
+      const imgRef = ref(this.storage, 'imagenes/' + this.nuevoPost.id);
+      uploadString(imgRef, file, 'data_url')
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+
+    }else{
+      alert("Capture o seleccione una imagen");
+    }
+
     this.bd.postPublicacion(this.nuevoPost).subscribe(res => {
       alert("Post subido con exito");
-      console.log(res);
+      console.log(this.imgURL);
+      this.imgURL = "";
+      this.nuevoPost.caption = "";
     })
   }
 
+  async abrirCamara(){
+    const image = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl
+    });
 
-  imgURL: any;
-
-  abrirCamara(){
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.CAMERA,
-      destinationType: this.camara.DestinationType.FILE_URI
-    }).then(res =>{
-      this.imgURL = res;
-    }).catch(e =>{
-      console.log(e);
-    })
+    this.imgURL = image.dataUrl;
   }
 
-
-  abrirGaleria(){
-    this.camara.getPicture({
-      sourceType: this.camara.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camara.DestinationType.FILE_URI
-    }).then(res =>{
-      this.imgURL = res;
-    }).catch(e =>{
-      console.log(e);
-    })
-  }
 }
