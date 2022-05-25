@@ -4,6 +4,9 @@ import { BdServiceService } from '../bd-service.service';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Storage, ref } from '@angular/fire/storage';
 import { uploadString } from 'firebase/storage';
+import { Geolocation } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { getStorage, getDownloadURL } from 'firebase/storage';
 
 @Component({
   selector: 'app-publicacion',
@@ -12,11 +15,16 @@ import { uploadString } from 'firebase/storage';
 })
 export class PublicacionComponent implements OnInit {
 
+  options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  }
+
   constructor(private bd: BdServiceService,
-     private storage: Storage) { }
+     private storage: Storage,
+     private nativeGeoCoder: NativeGeocoder) { }
 
   ngOnInit(): void {}
-
 
   crearID() {
     var id = "";
@@ -31,35 +39,40 @@ export class PublicacionComponent implements OnInit {
   id = this.crearID();
   imgURL: any;
 
+  
+
   nuevoPost: any = {
     "caption": "",
     "id": this.id,
     "src": this.id,
-    "usuario": "@cat"
+    "usuario": "@cat",
+    "ubicacion": ""
   }
 
-  
+
   onSubmit(f: NgForm){
-    if(this.imgURL != ""){
+    if(this.imgURL){
       const file = this.imgURL;
       console.log(file);
       
-      const imgRef = ref(this.storage, 'imagenes/' + this.nuevoPost.id);
-      uploadString(imgRef, file, 'data_url')
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+      const imgRef = ref(this.storage, "imagenes/" + this.id + ".png");
+      uploadString(imgRef, file, 'data_url').then(res =>{
+        console.log(res);
+      })
+
+      this.bd.postPublicacion(this.nuevoPost).subscribe(res => {
+        alert("Post subido con exito");
+        console.log(this.imgURL);
+        this.imgURL = "";
+        this.nuevoPost.caption = "";
+      })
 
     }else{
       alert("Capture o seleccione una imagen");
     }
-
-    this.bd.postPublicacion(this.nuevoPost).subscribe(res => {
-      alert("Post subido con exito");
-      console.log(this.imgURL);
-      this.imgURL = "";
-      this.nuevoPost.caption = "";
-    })
   }
+
+
 
   async abrirCamara(){
     const image = await Camera.getPhoto({
@@ -69,6 +82,53 @@ export class PublicacionComponent implements OnInit {
     });
 
     this.imgURL = image.dataUrl;
+  }
+
+
+
+  address: any;
+
+  async getLocation(){
+    const location = await Geolocation.getCurrentPosition();
+
+    this.nativeGeoCoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.options).then((res: NativeGeocoderResult[]) =>{
+      console.log("Location: ", res);
+      console.log("Location 0: ", res[0]);
+
+      this.address = this.generateAddress(res[0]);
+      this.nuevoPost.ubicacion = this.address;
+    })
+  }
+
+
+
+  generateAddress(addressObj: any){
+    let obj: any[] = [];
+    let uniqueNames: any[] = [];
+    let address = "";
+
+    for(let key in addressObj){
+      if(key != 'areasOfInterest'){
+        obj.push(addressObj[key]);
+      }
+    }
+
+    var i = 0;
+    obj.forEach(value =>{
+      if(uniqueNames.indexOf(obj[i]) === -1){ 
+        uniqueNames.push(obj[i]);
+      }
+
+      i++;
+
+    });
+
+    uniqueNames.reverse();
+    for(let val in uniqueNames){
+      if(uniqueNames[val].length){
+        address += uniqueNames[val] + '. ';
+      }
+    }
   }
 
 }

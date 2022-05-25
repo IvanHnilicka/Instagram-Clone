@@ -43,3 +43,8 @@
 .liked{
     color: red;
 }
+
+#location-icon{
+    padding-top: 6px;
+    padding-left: 15px;
+}

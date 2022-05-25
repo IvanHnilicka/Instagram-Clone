@@ -18,10 +18,11 @@ import { DetallePostFeedComponent } from './detalle-post-feed/detalle-post-feed.
 import { HistoriasComponent } from './historias/historias.component';
 import { HistoriaContenidoComponent } from './historia-contenido/historia-contenido.component';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { initializeApp } from 'firebase/app';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage())
+
   ],
-  providers: [Camera],
+  providers: [Camera, NativeGeocoder],
   bootstrap: [AppComponent],
   exports: [RoutesModule]
 })
-export class AppModule { }
+export class AppModule {}
