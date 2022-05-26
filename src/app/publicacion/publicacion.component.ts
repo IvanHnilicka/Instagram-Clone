@@ -6,7 +6,7 @@ import { Storage, ref } from '@angular/fire/storage';
 import { uploadString } from 'firebase/storage';
 import { Geolocation } from '@capacitor/geolocation';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
-import { getStorage, getDownloadURL } from 'firebase/storage';
+
 
 @Component({
   selector: 'app-publicacion',
@@ -14,7 +14,7 @@ import { getStorage, getDownloadURL } from 'firebase/storage';
   styleUrls: ['./publicacion.component.css']
 })
 export class PublicacionComponent implements OnInit {
-
+  
   options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
@@ -22,7 +22,7 @@ export class PublicacionComponent implements OnInit {
 
   constructor(private bd: BdServiceService,
      private storage: Storage,
-     private nativeGeoCoder: NativeGeocoder) { }
+     private nativegeocoder: NativeGeocoder) { }
 
   ngOnInit(): void {}
 
@@ -38,7 +38,6 @@ export class PublicacionComponent implements OnInit {
 
   id = this.crearID();
   imgURL: any;
-
   
 
   nuevoPost: any = {
@@ -49,6 +48,7 @@ export class PublicacionComponent implements OnInit {
     "ubicacion": ""
   }
 
+  address: any;
 
   onSubmit(f: NgForm){
     if(this.imgURL){
@@ -65,6 +65,7 @@ export class PublicacionComponent implements OnInit {
         console.log(this.imgURL);
         this.imgURL = "";
         this.nuevoPost.caption = "";
+        this.nuevoPost.ubicacion = "";
       })
 
     }else{
@@ -86,27 +87,25 @@ export class PublicacionComponent implements OnInit {
 
 
 
-  address: any;
 
   async getLocation(){
     const location = await Geolocation.getCurrentPosition();
+    console.log("Location: " + location);
 
-    this.nativeGeoCoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.options).then((res: NativeGeocoderResult[]) =>{
-      console.log("Location: ", res);
-      console.log("Location 0: ", res[0]);
+    this.nativegeocoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.options).then((res: NativeGeocoderResult[]) =>{
+      console.log("Result: " + res);
+      console.log("Result: " + res[0]);
 
-      this.address = this.generateAddress(res[0]);
-      this.nuevoPost.ubicacion = this.address;
+      let address = this.generateAddress(res[0]);
+      var addressParts = address.split(",");
+      this.nuevoPost.ubicacion = addressParts[3] + ", " + addressParts[4];
     })
   }
-
-
 
   generateAddress(addressObj: any){
     let obj: any[] = [];
     let uniqueNames: any[] = [];
     let address = "";
-
     for(let key in addressObj){
       if(key != 'areasOfInterest'){
         obj.push(addressObj[key]);
@@ -115,20 +114,21 @@ export class PublicacionComponent implements OnInit {
 
     var i = 0;
     obj.forEach(value =>{
-      if(uniqueNames.indexOf(obj[i]) === -1){ 
+      if(uniqueNames.indexOf(obj[i]) === -1){
         uniqueNames.push(obj[i]);
       }
 
       i++;
-
-    });
+    })
 
     uniqueNames.reverse();
     for(let val in uniqueNames){
       if(uniqueNames[val].length){
-        address += uniqueNames[val] + '. ';
+        address += uniqueNames[val] + ', ';
       }
     }
+
+    return address.slice(0, -2);
   }
 
 }

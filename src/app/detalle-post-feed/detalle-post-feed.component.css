@@ -1,3 +1,8 @@
-.captionDetalle{
+.label{
     padding-left: 15px;
+}
+
+.usuario-card-header{
+    display: flex;
+    padding-left: 4px;
 }

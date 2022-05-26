@@ -90,11 +90,11 @@ export class FeedComponent implements OnInit {
     })
   }
 
+
   liked: boolean = false;
 
   like(){
     this.liked = !this.liked;
   }
-
 
 }
