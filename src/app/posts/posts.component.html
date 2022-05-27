@@ -1,7 +1,7 @@
 <ion-grid>
     <ion-row>
-        <ion-col *ngFor="let post of posts" size="4">
-            <img [src]="post.imagen" alt="" width="300px" [routerLink]="['/post', post.id]">
+        <ion-col *ngFor="let publicacion of publicaciones" size="4">
+            <img [src]="publicacion.src" alt="" width="300px" [routerLink]="['/post', publicacion.id]">
         </ion-col>
     </ion-row>
 </ion-grid>

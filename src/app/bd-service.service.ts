@@ -26,21 +26,26 @@ export class BdServiceService {
 
   //Funciones POST
   postPublicacion(post: any){
-    return this.http.post('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones.json', post);
+    return this.http.post('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones.json', post);
   }
 
 
 
   //Funciones DELETE
   deletePublicacion(id: any){
-    return this.http.delete('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id + '.json');
+    return this.http.delete('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones/' + id + '.json');
   }
 
 
 
   //Funciones PUT
   updatePublicacion(id: any, nuevosDatos: any){
-    return this.http.put('https://insta-base-32-a975c-default-rtdb.firebaseio.com/publicaciones/' + id + '.json', nuevosDatos);
+    return this.http.put('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario/publicaciones/' + id + '.json', nuevosDatos);
+  }
+
+
+  updateBio(usuario: any){
+    return this.http.put('https://insta-base-32-a975c-default-rtdb.firebaseio.com/usuario.json', usuario);
   }
 
 }

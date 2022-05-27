@@ -13,20 +13,14 @@
                 <ion-card-header>
                     <ion-grid>
                         <ion-row>
-                            <ion-col size="6">
+                            <ion-col size="9">
                                 <div class="usuario-card-header">
                                     <ion-avatar>
                                         <ion-img src="https://www.gub.uy/fiscalia-general-nacion/sites/fiscalia-general-nacion/files/catalogo/Sin-Perfil-Hombre.png" alt="" width="10px"></ion-img>
                                     </ion-avatar>
                                 </div>
                             </ion-col>
-                            <ion-col size="6" class="opcion">
-                                <ion-button color="medium" size="small" fill="clear" (click)="editando = !editando">
-                                    <ion-icon name="create-outline"></ion-icon>
-                                </ion-button>
-                                <ion-button color="medium" size="small" fill="clear" (click)="borrarPost(id)">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </ion-button>
+                            <ion-col class="opcion">
                                 <ion-button fill="translucent" id="trigger-popup--{{publicacion.id}}" class="trigger">
                                     <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                                 </ion-button>
@@ -40,21 +34,28 @@
                         <ion-row>
                             <ion-label class="label">{{publicacion.usuario}}</ion-label>
                         </ion-row>
-
-                        <ion-row>
-                            <div *ngIf="editando" style="margin-top: 15px;">
-                                <ion-label><strong>Editar Post</strong></ion-label>
-                                <ion-input placeholder="Caption" [(ngModel)]="publicacion.caption"><i>New caption: </i></ion-input>
-                                <ion-button (click)="guardarCambios(id, publicacion)">Guardar</ion-button>
-                                <ion-button (click)="editando = false">Cancelar</ion-button>
-                            </div>
-                        </ion-row>
                     </ion-grid>
                 </ion-card-header>
 
                 <ion-card-content>
                     <img [src]="publicacion.src" alt="" width = 100% [routerLink]="['/postFeed', publicacion.id]">
                     
+
+                    <ion-grid style="padding: 0;">
+                        <ion-row>
+                            <ion-col size="6">
+                                <ion-label style="padding: 0;" id="caption-publicacion">{{publicacion.caption}}</ion-label>
+                            </ion-col>
+                            <ion-col size="1" id="location-icon" *ngIf="publicacion.ubicacion">
+                                <ion-icon name="location-outline"></ion-icon>
+                            </ion-col>
+                            <ion-col class="ion-align-self-end">
+                                <ion-label style="padding: 0;">{{publicacion.ubicacion}}</ion-label>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
                     <div class="opciones">
                         <ion-col size="1">
                             <!-- <ion-icon class="like" [ngClass]="{'liked':liked==true}" name="heart-outline" (click)="like()"></ion-icon> -->
@@ -71,21 +72,6 @@
                             <ion-icon name="bookmark-outline"></ion-icon>
                         </ion-col>
                     </div>
-
-                    <ion-grid style="padding: 0;">
-                        <ion-row>
-                            <ion-col size="6">
-                                <ion-label style="padding: 0;" id="caption-publicacion">{{publicacion.caption}}</ion-label>
-                            </ion-col>
-                            <ion-col size="1" id="location-icon" *ngIf="publicacion.ubicacion">
-                                <ion-icon name="location-outline"></ion-icon>
-                            </ion-col>
-                            <ion-col class="ion-align-self-end">
-                                <ion-label style="padding: 0;">{{publicacion.ubicacion}}</ion-label>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-
                 </ion-card-content>
 
             </ion-card>

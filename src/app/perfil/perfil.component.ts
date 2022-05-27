@@ -13,6 +13,7 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.db.getDatosUsuario().subscribe((res: any) =>{
       this.usuario = res;
+      console.log(this.usuario);
     })
   }
 
@@ -28,6 +29,10 @@ export class PerfilComponent implements OnInit {
 
   guardarBio(): void{
     this.usuario.descripcion = this.bio;
+    this.db.updateBio(this.usuario).subscribe(res=>{
+      console.log(res);
+      alert("Bio actualizada");
+    })
     this.toggleEditarPerfil();
   }
 
